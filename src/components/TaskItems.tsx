@@ -48,7 +48,7 @@ const TaskItems: React.FC<TaskItemsProps> = ({
         {data.map((item: Task) => (
           <li
             key={item.id}
-            className={`listitems flex justify-between items-center bg-gray-100 px-4 py-2 rounded shadow ${
+            className={`listitems flex justify-between items-center overflow-hidden break-all bg-gray-100 px-4 py-2 rounded shadow ${
               item.isCompleted ? 'line-through opacity-50 text-gray-500' : ''
             }`}
           >
@@ -69,11 +69,11 @@ const TaskItems: React.FC<TaskItemsProps> = ({
               </>
             ) : (
               <>
-                {item.description}
+                <span className='block w-75 break-words'>{item.description}</span>
                 {!item.isCompleted && (
-                  <>
-                    <button onClick={() => markAsCompleted(item.id)}>✅</button>
-                    <button onClick={() => handleClick(item)}>✏️</button>
+                  <><div>
+                    <button className="absolute left-1/2 transform -translate ml-1"onClick={() => markAsCompleted(item.id)}>✅</button>
+                    <button onClick={() => handleClick(item)}>✏️</button></div>
                   </>
                 )}
               </>
@@ -93,7 +93,7 @@ const TaskItems: React.FC<TaskItemsProps> = ({
           {showCompleted && completedTask.length > 0 && (
             <ol className="mt-2 list-disc pl-5">
               {completedTask.map((item: Task) => (
-                <li className="completedTaskitems" key={item.id}>
+                <li className=' completedTaskitems block w-75 break-words' key={item.id}>
                   {item.description}
                 </li>
               ))}
@@ -111,7 +111,7 @@ const TaskItems: React.FC<TaskItemsProps> = ({
           {showIncomplete && inCompleteTasks.length > 0 && (
             <ol className="mt-2 list-disc pl-5">
               {inCompleteTasks.map((item: Task) => (
-                <li className="incompletedTaskitems" key={item.id}>
+                <li className="incompletedTaskitems block w-75 break-words" key={item.id}>
                   {item.description}
                 </li>
               ))}
