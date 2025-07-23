@@ -44,11 +44,11 @@ const TaskItems: React.FC<TaskItemsProps> = ({
 
   return (
     <div>
-      <ol className="list space-y-2">
+      <ol className="list ">
         {data.map((item: Task) => (
           <li
             key={item.id}
-            className={`listitems flex justify-between items-center overflow-hidden break-all bg-gray-100 px-4 py-2 rounded shadow ${
+            className={`listitems m-1 grid grid-cols-3 gap-2 w-full items-center overflow-hidden break-all bg-gray-100 px-4 py-2 rounded shadow ${
               item.isCompleted ? 'line-through opacity-50 text-gray-500' : ''
             }`}
           >
@@ -69,19 +69,22 @@ const TaskItems: React.FC<TaskItemsProps> = ({
               </>
             ) : (
               <>
-                <span className='block w-75 break-words'>{item.description}</span>
+               <span className="break-words w-13/9 ">
+  {item.description}
+</span>
+
                 {!item.isCompleted && (
-                  <><div>
-                    <button className="absolute left-1/2 transform -translate ml-1"onClick={() => markAsCompleted(item.id)}>✅</button>
-                    <button onClick={() => handleClick(item)}>✏️</button></div>
+                  <>
+                    <button className="flex justify-center items-center w-9/9"onClick={() => markAsCompleted(item.id)}>✅</button>
+                    <button className='flex justify-end w-9/9' onClick={() => handleClick(item)}>✏️</button>
                   </>
                 )}
               </>
             )}
-          </li>
+          </li> 
         ))}
       </ol>
-      <div className="complete-incomplete-wrapper flex flex-col md:flex-row gap-6 mt-6">
+      <div className="complete-incomplete-wrapper grid grid-cols-2 w-full overflow-hidden break-all gap-6 mt-6 list-disc" >
         {/* Completed Tasks Toggle */}
         <div className="task-column flex-1">
           <button
@@ -93,7 +96,7 @@ const TaskItems: React.FC<TaskItemsProps> = ({
           {showCompleted && completedTask.length > 0 && (
             <ol className="mt-2 list-disc pl-5">
               {completedTask.map((item: Task) => (
-                <li className=' completedTaskitems block w-75 break-words' key={item.id}>
+                <li className=' completedTaskitems   break-words' key={item.id}>
                   {item.description}
                 </li>
               ))}
@@ -111,7 +114,7 @@ const TaskItems: React.FC<TaskItemsProps> = ({
           {showIncomplete && inCompleteTasks.length > 0 && (
             <ol className="mt-2 list-disc pl-5">
               {inCompleteTasks.map((item: Task) => (
-                <li className="incompletedTaskitems block w-75 break-words" key={item.id}>
+                <li className="incompletedTaskitems  list-disc break-words" key={item.id}>
                   {item.description}
                 </li>
               ))}
